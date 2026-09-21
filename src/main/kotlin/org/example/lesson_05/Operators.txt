@@ -1,0 +1,264 @@
+Задачи с простыми операторами
+
+(14 - 4 <= 10) || (6 / 2 != 3)
+14 - 4 = 10
+10 = 10 -> true
+6/2 = 3
+3! = 3 -> false
+true || false
+true
+
+(9 + 1 == 10) && (8 % 2 == 0)
+true && true
+true
+
+(7 - 2 < 5) || (4 * 3 != 12)
+7 - 2 = 5
+5 < 5 -> false
+4 * 3 = 12
+12 != 12 -> false
+false || false
+false
+
+(18 / 6 >= 3) && (5 + 5 == 10)
+18 / 6 = 3
+3 >= 3 - > true
+5 + 5 = 10
+10 == 10 -> true
+true && true
+true
+
+(11 % 3 != 2) || (9 - 3 == 6)
+11 % 3 = 2
+2 != 2 -> false
+9 - 3 = 6
+6 == 6 - > true
+false || true
+true
+
+(5 * 2 < 11) && (14 / 2 == 7)
+5 * 2 = 10
+10 < 11 -> true
+14 / 2 = 7
+7 == 7 -> true
+true || true
+true
+
+
+(8 + 2 <= 10) || (7 % 2 != 1)
+8 + 2 = 10
+10 <= 10 -> true
+7 % 2 = 1
+1 != 1 -> false
+true || false
+true
+
+(16 / 4 > 3) && (3 + 4 == 7)
+16 / 4 = 4
+4 > 3 -> true
+3 + 4 = 7
+7 == 7 -> true
+true && true
+true
+
+
+(10 % 2 == 0) || (5 - 3 != 1)
+10 % 2 = 0
+0 == 0 -> true
+5 - 3 = 2
+2 != 1 -> true
+true || true
+true
+
+
+Задачи с приоритетом операторов
+
+7 - 2 * (2 + 3) / 5 + 3 * 2
+(2 + 3) = 5
+2 * 5 = 10
+10 / 5 = 2
+3 * 2 = 6
+7 - 2 + 6
+7 - 2 = 5
+5 + 6 = 11
+
+
+
+7 - 2 * 2 + 3 / 3 + 5 * 2
+2 * 2 = 4
+3 / 3 = 1
+5 * 2 = 10
+7 - 4 + 1 + 10
+7 - 4 = 3
+3 + 1 = 4
+4 + 10 = 14
+
+((4 * 3) < 13) && !(8 / 4 == 2) || (10 % 3 != 1)
+4 * 3 = 12
+12 < 13 -> true
+8 / 4 == 2
+2 == 2 -> true
+10 % 3 = 1
+1 != 1 - > false
+true && !true || false
+true && false || false
+false || false
+false
+
+(((14 - 5) > 8) || (9 / 3 == 3)) && !(7 + 0 != 7)
+14 - 5 = 9
+9 > 8 -> true
+9 / 3 = 3
+3 == 3 -> true
+7 + 0 = 7
+7 != 7 -> false
+true || true && !false
+(true || true) && true
+true && true
+true
+
+
+((2 + 3) <= 5) && (16 / 4 == 4) || !(6 % 2 == 0)
+2 + 3 = 5
+5 <= 5 -> true
+16 / 4 = 4
+4 == 4 -> true
+6 % 2 = 0
+0 == 0 -> true
+true && true || !true
+true && true || false
+true || false
+true
+true && true
+true
+
+
+Задачи с инкрементом и декрементом
+
+(var f = 6; --f >= 5) || ((3 * 2 == 6) && (9 - 4 != 5))
+--f
+f = 5
+5 >= 5 -> true
+
+3 * 2 = 6
+6 == 6 -> true
+
+9 - 4 = 5
+5 != 5 -> false
+
+true || (true && false)
+(true && false) -> false
+true || false
+true
+
+(var g = 0; g++ != 0) && !((4 + 2 == 6) || (5 / 1 == 5))
+g++
+g = 0
+0 != 0 -> false
+
+4 + 2 = 6
+6 == 6 -> true
+
+5 / 1 = 5
+5 == 5 -> true
+
+false && !false || true
+false && true || true
+false && true -> false
+false || true
+true
+
+!(var h = 7; h-- > 6) || (8 + 1 == 9) && (3 % 2 != 1)
+h--
+h = 7
+7 > 6 -> true
+
+8 + 1 = 9
+9 == 9 -> true
+3 % 2 = 1
+1 != 1 -> false
+!true || true && false
+false || true && false
+true && false -> false
+false || false
+false
+
+((var i = 5; i++ == 5) || (2 * 2 != 4)) && (10 / 2 == 5)
+i++
+i = 5
+5 == 5 -> true
+
+2 * 2 = 4
+4 != 4 -> false
+
+10 / 2 = 5
+5 == 5 -> true
+
+(true || false) && true
+(true || false) -> true
+true && true
+true
+
+
+(var j = 4; j-- < 4) && (6 + 0 == 6) || !(5 % 2 != 1)
+j--
+j = 4
+4 < 4 -> false
+
+6 + 0 = 6
+6 == 6 -> true
+
+5 % 2 = 1
+1 != 1 -> false
+
+false && true || !false
+false && true || true
+false && true -> false
+false || true
+true
+
+
+Задача 1
+
+Контекст: Вы изучаете физическое явление затухания звукав помещении. У вас есть измеренное значение начальной интенсивности звука,
+но из-за ограничений оборудования данные о коэффициенте затухания иногда могут быть неизвестны.
+
+Задача: Рассчитать предполагаемую интенсивность звука после затухания. Интенсивность звука после затухания пропорциональна начальной интенсивности,
+умноженной на коэффициент затухания. Если коэффициент затухания неизвестен, использовать стандартное значение 0.5.
+fun main() {
+   val baseIntensity: Double = 3.0
+   val coefficient: Double? = 0.73
+   val baseCoefficient = 0.5
+   val resultIntensity = baseIntensity * (coefficient ?: baseCoefficient)
+}
+
+Задача 2
+
+Контекст: Клиент оплачивает доставку груза. К стоимости доставки добавляется страховка на груз, которая составляет 0,5% от его стоимости.
+В случае, если стоимость не указана, то берётся стандартная стоимость в $50
+
+Задача: Рассчитать полную стоимость доставки.
+
+fun main1(){
+       val defaultCost: Double = 50.0
+       val cost: Double? = 20.0
+       val deliveryCost = 5.0
+       val insuranceCoefficient = 0.005
+       // стоимость страховки
+       val insuranceCost = (cost ?: defaultCost) * insuranceCoefficient
+       val totalCost: Double = deliveryCost + insuranceCost
+}
+
+
+
+Задача 3
+
+Контекст: Вы проводите метеорологические измерения. Одним из важных показателей является атмосферное давление, которое должно быть зафиксировано.
+Лаборант приносит вам набор показателей, но по пути может что-нибудь потерять.
+Задача - сообщить об ошибке в случае отсутствия показаний атмосферного давления.
+
+fun main2(){
+   val pressure: String? = "34.6"
+   val attentionMessage = "Attention, pressure is lost"
+   val pressureForLab = pressure ?: attentionMessage
+}
