@@ -153,3 +153,202 @@ private val colorPairs: Printer(){
         }
     }
 }
+
+// Перегрузка методов
+//
+//Класс “Корзина товаров”: содержит поле словаря из ID товаров и их количества.
+//Базовый метод addToCart(itemId) добавляет одну единицу товара к уже существующим в корзине.
+//Выполнить перегрузку addToCart который:
+//Принимает два аргумента (itemId и количество amount)
+//Принимает словарь из id и количества и добавляет всё в корзину
+//Принимает список из id (добавляет по одной единице).
+//Учесть, что если товар уже есть в корзине, нужно увеличить его количество, если нет - добавить.
+//Попробуй создать корзину и положить в неё товар разными способами, потом распечатать корзину в консоль.
+//Переопредели у корзины метод toString для красивого форматирования содержимого таблицы, включая итоговое количество артикулов и общее количество всего товара в корзине.
+//Класс “Логгер”: представляет из себя инструмент для вывода информации в консоль с разным префиксами уровня логирования (INFO, WARNING, ERROR, DEBUG)
+//Базовый метод log(message) выводит в консоль сообщение message с префиксом INFO
+//Выполнить перегрузку метода log, который:
+//Принимает уровень логирования и сообщение. Выводит сообщения типа WARNING жёлтым цветом, а ERROR белым цветом на красном фоне.
+//Принимает список сообщений и все их выводит с уровнем INFO
+//Принимает объект типа Exception и выводит его поле message с префиксом уровня ERROR
+//Попробуй создать логгер и добавить в него сообщения разными способами. Проверь вывод в консоли.
+
+
+// Корзина товаров
+
+    class ShoppingCart {
+
+        private val items = mutableMapOf<Int, Int>()
+
+        // Добавление одного товара
+        fun addToCart(itemId: Int) {
+            items[itemId] = items.getOrDefault(itemId, 0) + 1
+        }
+
+        // Добавление нескольких единиц одного товара
+        fun addToCart(itemId: Int, amount: Int) {
+            if (amount <= 0) {
+                println("Количество должно быть больше нуля!")
+                return
+            }
+
+            items[itemId] = items.getOrDefault(itemId, 0) + amount
+        }
+
+        // Добавление словаря товаров
+        fun addToCart(newItems: Map<Int, Int>) {
+            newItems.forEach { (itemId, amount) ->
+                addToCart(itemId, amount)
+            }
+        }
+
+        // Добавление списка товаров
+        fun addToCart(itemIds: List<Int>) {
+            itemIds.forEach { itemId ->
+                addToCart(itemId)
+            }
+        }
+
+        // Красивое отображение корзины
+        override fun toString(): String {
+
+            val totalArticles = items.size
+            val totalAmount = items.values.sum()
+
+            val result = StringBuilder()
+
+            result.appendLine("========== SHOPPING CART ==========")
+            result.appendLine("ID товара     Количество")
+            result.appendLine("-----------------------------------")
+
+            items.forEach { (itemId, amount) ->
+                result.appendLine(
+                    "%-14d %d".format(itemId, amount)
+                )
+            }
+
+            result.appendLine("-----------------------------------")
+            result.appendLine("Всего артикулов: $totalArticles")
+            result.appendLine("Всего товаров: $totalAmount")
+            result.appendLine("===================================")
+
+            return result.toString()
+        }
+    }
+
+// Логгер
+
+    class Logger {
+
+        // INFO: одно сообщение
+        fun log(message: String) {
+            println("${Colors.GREEN}[INFO]${Colors.RESET} $message")
+        }
+
+        // Сообщение с выбранным уровнем
+        fun log(level: String, message: String) {
+
+            when (level.uppercase()) {
+
+                "INFO" -> {
+                    println("${Colors.GREEN}[INFO]${Colors.RESET} $message")
+                }
+
+                "WARNING" -> {
+                    println("${Colors.YELLOW}[WARNING]${Colors.RESET} $message")
+                }
+
+                "ERROR" -> {
+                    println(
+                        "${Colors.WHITE}${Background.RED}[ERROR] $message${Colors.RESET}"
+                    )
+                }
+
+                "DEBUG" -> {
+                    println("${Colors.BLUE}[DEBUG]${Colors.RESET} $message")
+                }
+
+                else -> {
+                    println("[UNKNOWN] $message")
+                }
+            }
+        }
+
+        // Список сообщений
+        fun log(messages: List<String>) {
+            messages.forEach { message ->
+                log(message)
+            }
+        }
+
+        // Вывод исключения
+        fun log(exception: Exception) {
+            println(
+                "${Colors.WHITE}${Background.RED}" +
+                        "[ERROR] ${exception.message}${Colors.RESET}"
+            )
+        }
+    }
+
+// Главная функция
+
+    fun main() {
+
+        // Проверка корзины
+
+        val cart = ShoppingCart()
+
+        println("Добавляем товары в корзину:")
+
+        // Добавляем один товар
+        cart.addToCart(101)
+
+        // Добавляем несколько единиц товара
+        cart.addToCart(102, 5)
+
+        // Добавляем словарь товаров
+        cart.addToCart(
+            mapOf(
+                101 to 3,
+                103 to 2,
+                104 to 4
+            )
+        )
+
+        // Добавляем список товаров
+        cart.addToCart(
+            listOf(101, 102, 105, 105, 106)
+        )
+
+        println(cart)
+
+        // Проверка логгера
+
+        val logger = Logger()
+
+        println("========== LOGGER ==========")
+
+        // Обычное сообщение
+        logger.log("Программа успешно запущена")
+
+        // Сообщения с разными уровнями
+        logger.log("WARNING", "Недостаточно места на диске")
+        logger.log("ERROR", "Не удалось подключиться к серверу")
+        logger.log("DEBUG", "Проверка переменной")
+
+        // Список сообщений
+        logger.log(
+            listOf(
+                "Пользователь вошёл в систему",
+                "Данные загружены",
+                "Операция выполнена успешно"
+            )
+        )
+
+        // Исключение
+        try {
+            val number = 10 / 0
+        } catch (e: Exception) {
+            logger.log(e)
+        }
+    }
